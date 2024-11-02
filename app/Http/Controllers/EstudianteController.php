@@ -45,6 +45,7 @@ class EstudianteController extends Controller
             'id_carrera',
             'id_jornada',
             'id_modalidad',
+            'id_regional'
         ]);
 
         $estudiante = $this->estudianteService->store($data);

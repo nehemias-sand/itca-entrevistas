@@ -18,9 +18,15 @@ class Docente extends Model
         'carnet',
         'nombres',
         'apellidos',
+        'id_usuario',
         'id_cargo',
-        'id_facultad'
+        'id_facultad',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id_usuario');
+    }
 
     public function cargo(): BelongsTo
     {

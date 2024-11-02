@@ -9,13 +9,21 @@ class EntrevistaResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'aprobada' => $this->aprobada,
+            'observaciones' => $this->observaciones,
+            'docente' => new DocenteResource($this->whenLoaded('docente')),
+            'estudiante' => new EstudianteResource($this->whenLoaded('estudiante')),
+        ];
     }
 
     public function toJson($options = 0)
     {
         return [
-            
+            'aprobada' => $this->aprobada,
+            'observaciones' => $this->observaciones,
+            'docente' => new DocenteResource($this->whenLoaded('docente')),
+            'estudiante' => new EstudianteResource($this->whenLoaded('estudiante')),
         ];
     }
 }

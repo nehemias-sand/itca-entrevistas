@@ -40,13 +40,13 @@ class AuthController extends Controller
     {
         $username = $request->username;
         $email = $request->email;
-        $password = $this->authService->generatePassword();
+        $password = AuthService::generatePassword();
 
         $data = [
             'username' => $username,
             'email' => $email,
             'password' => $password,
-            'id_perfil' => 2 // Administrador
+            'id_perfil' => 1 // Administrador
         ];
 
         DB::beginTransaction();

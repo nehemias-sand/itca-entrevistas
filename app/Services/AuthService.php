@@ -17,7 +17,7 @@ class AuthService
         return $this->authRepositoryInterface->register($data);
     }
 
-    public function generatePassword()
+    public static function generatePassword()
     {
         $longitud = 10;
         $caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';

@@ -4,6 +4,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarreraController;
 use App\Http\Controllers\CatalogoPreguntasController;
 use App\Http\Controllers\CicloController;
+use App\Http\Controllers\DocenteController;
+use App\Http\Controllers\EntrevistaController;
+use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\PreguntaController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,7 +31,7 @@ Route::middleware('jwt', 'check.profile:ADMIN')->prefix('admin')
     ->group(function () {
         // Usuarios
         Route::post('/user/register', [AuthController::class, 'registerAdmin']);
-
+        
         // Ciclos
         Route::post('/ciclo', [CicloController::class, 'store']);
         Route::put('/ciclo/{id}', [CicloController::class, 'update']);
@@ -54,9 +57,20 @@ Route::middleware('jwt', 'check.profile:ADMIN')->prefix('admin')
         Route::post('/catalogo', [CatalogoPreguntasController::class, 'store']);
         Route::put('/catalogo/{id}', [CatalogoPreguntasController::class, 'update']);
         Route::delete('/catalogo/{id}', [CatalogoPreguntasController::class, 'delete']);
+
+        //Docente
+        Route::get('/docente', [DocenteController::class, 'index']);
+        Route::get('/docente/{id}', [DocenteController::class, 'show']);
+        Route::post('/docente/register', [DocenteController::class, 'register']);
+        Route::put('/docente/{id}', [DocenteController::class, 'update']);
+        Route::delete('/docente/{id}', [DocenteController::class, 'delete']);
+
+        //Estudiante
+        Route::post('/estudiante/register', [EstudianteController::class, 'store']);
     });
 
 Route::middleware('jwt', 'check.profile:DOCENTE')->prefix('docente')
     ->group(function () {
-        
+        //Entrevista
+        Route::post('/entrevista/register', [EntrevistaController::class, 'register']);
     });

@@ -33,7 +33,7 @@ class CarreraController extends Controller
         $carrera = $this->carreraService->show($id);
         if (!$carrera) return ApiResponseClass::sendResponse(null, "Carrera con ID $id no encontrada", 404);
 
-        return ApiResponseClass::sendResponse(new CarreraResource($catalogo));
+        return ApiResponseClass::sendResponse(new CarreraResource($carrera));
     }
 
     public function store(CreateCarreraRequest $request)

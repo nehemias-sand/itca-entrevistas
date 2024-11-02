@@ -35,6 +35,11 @@ class CreateEstudianteRequest extends FormRequest
                 'integer',
                 Rule::exists('modalidades', 'id')->whereNull('deleted_at')
             ],
+            'id_regional' => [
+                'required',
+                'integer',
+                Rule::exists('regionales', 'id')->whereNull('deleted_at')
+            ],
         ];
     }
 
@@ -56,6 +61,10 @@ class CreateEstudianteRequest extends FormRequest
             'id_modalidad.required' => 'El campo :attribute es obligatorio',
             'id_modalidad.integer' => 'El campo :attribute debe ser un entero',
             'id_modalidad.exists' => 'El campo :attribute debe ser un id valido',
+            'id_regional.required' => 'El campo :attribute es obligatorio',
+            'id_regional.integer' => 'El campo :attribute debe ser un entero',
+            'id_regional.exists' => 'El campo :attribute debe ser un id valido',
+            
         ];
     }
 

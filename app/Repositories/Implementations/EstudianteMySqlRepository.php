@@ -3,6 +3,7 @@
 namespace App\Repositories\implementations;
 
 use App\Models\Estudiante;
+use App\Models\SeguimientoCarrera;
 use App\Repositories\EstudianteRepositoryInterface;
 
 class EstudianteMySqlRepository implements EstudianteRepositoryInterface
@@ -12,7 +13,7 @@ class EstudianteMySqlRepository implements EstudianteRepositoryInterface
         $estudiantes = Estudiante::query();
 
         if (isset($filter['nombresOrApellidos'])) {
-            $catalogos->where('nombres', 'like', '%' . $filter['nombresOrApellidos'] . '%')
+            $estudiantes->where('nombres', 'like', '%' . $filter['nombresOrApellidos'] . '%')
                 ->orWhere('apellidos', 'like', '%' . $filter['nombresOrApellidos'] . '%');
         }
 
@@ -33,13 +34,45 @@ class EstudianteMySqlRepository implements EstudianteRepositoryInterface
 
     public function store(array $data)
     {
-        return Estudiante::create($data);
+        $nombres = $data['nombres'];
+        $apellidos = $data['apellidos'];
+        $correo = $data['correo'];
+        $idCarrera = $data['id_carrera'];
+        $idJornada = $data['id_jornada'];
+        $idModalidad = $data['id_modalidad'];
+        $idRegional = $data['id_regional'];
+
+        $seguimientoCarrera = SeguimientoCarrera::where('id_carrera', $idCarrera)
+            ->where('id_jornada', $idJornada)
+            ->where('id_modalidad', $idModalidad)
+            ->where('id_regional', $idRegional)
+            ->first();
+
+        if(!$seguimientoCarrera) {
+            throw new \Exception('No se encontró el seguimiento de carrera con los datos proporcionados.');
+        }
+
+        $estudiante = Estudiante::create(compact('nombres', 'apellidos', 'correo'));
+        $estudiante->carreras()->sync([$seguimientoCarrera->id]);
+
+        return $estudiante;
     }
 
     public function update($id, array $data)
     {
         $estudiante = $this->show($id);
         if (!$estudiante) return null;
+        $dataToUpdate = [];
+
+        if(isset($data['nombres'])) $dataToUpdate['nombres'] = $data['nombres'];
+        if(isset($data['apellidos'])) $dataToUpdate['apellidos'] = $data['apellidos'];
+        if(isset($data['correo'])) $dataToUpdate['correo'] = $data['correo'];
+
+        $estudiante->update($dataToUpdate);
+
+        if(isset($data['id_seguimiento_carrera'])) {
+
+        }
 
         $estudiante->update($data);
         return $estudiante;

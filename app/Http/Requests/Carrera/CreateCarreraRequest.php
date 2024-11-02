@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Carrera;
 
+use App\Models\Docente;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -22,7 +23,17 @@ class CreateCarreraRequest extends FormRequest
             'seguimientos.*.id_jornada' => 'required|integer|exists:jornadas,id',
             'seguimientos.*.id_modalidad' => 'required|integer|exists:modalidades,id',
             'seguimientos.*.id_regional' => 'required|integer|exists:regionales,id',
-            'seguimientos.*.id_coordinador' => 'required|integer|exists:docentes,id'
+            'seguimientos.*.id_coordinador' => [
+                'required',
+                'integer',
+                'exists:docentes,id',
+                function ($attribute, $value, $fail) {
+                    $docente = Docente::find($value);
+                    if ($docente && $docente->id_cargo !== 1) {
+                        $fail('El ' . $attribute . ' seleccionado no tiene el cargo de coordinador.');
+                    }
+                }
+            ],
         ];
     }
 

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('carnet');
             $table->string('nombres');
             $table->string('apellidos');
+            $table->foreignId('id_usuario')->constrained('users');
             $table->foreignId('id_cargo')->constrained('cargos');
             $table->foreignId('id_facultad')->constrained('facultades');
             $table->timestamp('created_at')->useCurrent();
