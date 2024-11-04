@@ -11,7 +11,7 @@ class PreguntaMySqlRepository implements PreguntaRepositoryInterface
         $preguntas = Pregunta::query();
 
         if ($pagination['paginate'] === 'true') {
-            return $preguntas->paginate($pagination['perPage']);
+            return $preguntas->paginate($pagination['per_page']);
         }
 
         return $preguntas->get();

@@ -16,7 +16,7 @@ class CarreraMySqlRepository implements CarreraRepositoryInterface
         }
 
         if ($pagination['paginate']  === 'true') {
-            return $carreras->paginate($pagination['perPage']);
+            return $carreras->paginate($pagination['per_page']);
         }
 
         return $carreras->get();

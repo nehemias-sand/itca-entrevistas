@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Classes\ApiResponseClass;
+use Illuminate\Http\Request;
 use App\Http\Requests\Auth\ChangePasswordRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\UpdateUsuarioRequest;
+use App\Http\Resources\UsuarioResource;
 use App\Mail\WelcomeMail;
 use App\Services\AuthService;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +31,16 @@ class AuthController extends Controller
                 return ApiResponseClass::sendResponse(null, 'Invalid credentials', 401);
             }
 
-            $user = auth()->user();
+            $sessionUser = auth()->user();
+
+            $user = [
+                'id' => $sessionUser->id,
+                'username' => $sessionUser->username,
+                'email' => $sessionUser->email,
+                'email_verified_at' => $sessionUser->email_verified_at,
+                'perfil' => $sessionUser->perfil->acronimo,
+                'activo' => $sessionUser->activo,
+            ];
 
             return ApiResponseClass::sendResponse(compact('user', 'token'));
         } catch (JWTException $e) {
@@ -53,7 +65,6 @@ class AuthController extends Controller
 
         try {
             $user = $this->authService->register($data);
-            $token = JWTAuth::fromUser($user);
 
             Mail::to($data['email'])
                 ->send(new WelcomeMail(
@@ -61,10 +72,23 @@ class AuthController extends Controller
                 ));
 
             DB::commit();
-            return ApiResponseClass::sendResponse(compact('user', 'token'), null, 201);
+            return ApiResponseClass::sendResponse(new UsuarioResource($user), null, 201);
         } catch (\Exception $ex) {
             return ApiResponseClass::rollback($ex);
         }
+    }
+
+    public function index(Request $request)
+    {
+        $pagination = array_merge([
+            'paginate' => 'true',
+            'per_page' => 10
+        ], $request->only(['paginate', 'per_page']));
+
+        $filter = $request->only(['email']);
+
+        $data = $this->authService->index($pagination, $filter);
+        return ApiResponseClass::sendResponse(UsuarioResource::collection($data));
     }
 
     public function getUser()
@@ -80,20 +104,54 @@ class AuthController extends Controller
         return ApiResponseClass::sendResponse(compact('user'));
     }
 
+    public function update($id, UpdateUsuarioRequest $request)
+    {
+        $data = $request->only([
+            'username',
+            'email',
+        ]);
+
+        $user = $this->authService->update($id, $data);
+        if (!$user) return ApiResponseClass::sendResponse(null, "Usuario con ID $id no encontrado", 404);
+
+        return ApiResponseClass::sendResponse(new UsuarioResource($user));
+    }
+
     public function changePassword(ChangePasswordRequest $request)
     {
         $user = auth()->user();
-    
+        $email = $user->email;
+        $password = $request->current_password;
+        $credentials = compact('email', 'password');
+
+        if (! $token = JWTAuth::attempt($credentials)) {
+            return ApiResponseClass::sendResponse(null, 'Invalid credentials', 401);
+        }
+
         DB::beginTransaction();
 
         try {
-            $user = $this->authService->updatePassword($user->id, $request->new_password);
+            $user = $this->authService->update(
+                $user->id,
+                ['password' => $request->new_password]
+            );
 
             DB::commit();
             return ApiResponseClass::sendResponse(compact('user'));
         } catch (\Exception $ex) {
             return ApiResponseClass::rollback($ex);
         }
+    }
+
+    public function changeEstado($id)
+    {
+        $userUpdated = $this->authService->changeEstado($id);
+        if (!$userUpdated) {
+            return ApiResponseClass::sendResponse(null, "Usuario con ID $id no encontrado", 404);
+        }
+
+        $message = $userUpdated->activo ? 'Usuario activado exitosamente' : 'Usuario desactivado exitosamente';
+        return ApiResponseClass::sendResponse(null, $message);
     }
 
     public function logout()

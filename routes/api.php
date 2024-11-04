@@ -30,7 +30,10 @@ Route::middleware('jwt', 'check.profile:ADMIN,DOCENTE')
 Route::middleware('jwt', 'check.profile:ADMIN')->prefix('admin')
     ->group(function () {
         // Usuarios
+        Route::get('/user', [AuthController::class, 'index']);
         Route::post('/user/register', [AuthController::class, 'registerAdmin']);
+        Route::put('/user/{id}', [AuthController::class, 'update']);
+        Route::put('/user/change-estado/{id}', [AuthController::class, 'changeEstado']);
         
         // Ciclos
         Route::post('/ciclo', [CicloController::class, 'store']);

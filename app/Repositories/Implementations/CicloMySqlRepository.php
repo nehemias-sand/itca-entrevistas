@@ -15,7 +15,7 @@ class CicloMySqlRepository implements CicloRepositoryInterface
         }
 
         if ($pagination['paginate'] === 'true') {
-            return $ciclos->paginate($pagination['perPage']);
+            return $ciclos->paginate($pagination['per_page']);
         }
 
         return $ciclos->get();

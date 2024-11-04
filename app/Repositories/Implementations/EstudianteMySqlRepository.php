@@ -18,7 +18,7 @@ class EstudianteMySqlRepository implements EstudianteRepositoryInterface
         }
 
         if ($pagination['paginate'] === 'true') {
-            return $estudiantes->paginate($pagination['perPage']);
+            return $estudiantes->paginate($pagination['per_page']);
         }
 
         return $estudiantes->get();

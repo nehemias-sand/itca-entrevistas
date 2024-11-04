@@ -15,7 +15,7 @@ class CatalogoPreguntaMySqlRepository implements CatalogoPreguntaRepositoryInter
         }
 
         if ($pagination['paginate']  === 'true') {
-            return $catalogos->paginate($pagination['perPage']);
+            return $catalogos->paginate($pagination['per_page']);
         }
 
         return $catalogos->get();

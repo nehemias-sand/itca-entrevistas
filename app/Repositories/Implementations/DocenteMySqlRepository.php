@@ -17,7 +17,7 @@ class DocenteMySqlRepository implements DocenteRepositoryInterface{
         }
 
         if($pagination['paginate'] === 'true') {
-            return $docentes->paginate($pagination['perPage']);
+            return $docentes->paginate($pagination['per_page']);
         }
 
         return $docentes->get();

@@ -19,8 +19,8 @@ class CicloController extends Controller
     {
         $pagination = array_merge([
             'paginate' => 'true',
-            'perPage' => 10
-        ], $request->only(['paginate', 'perPage']));
+            'per_page' => 10
+        ], $request->only(['paginate', 'per_page']));
 
         $filter = $request->only(['anio']);
 
