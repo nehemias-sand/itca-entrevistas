@@ -10,8 +10,8 @@ class TipoRespuestaService
         private TipoRespuestaRepositoryInterface $tipoRespuestaRepositoryInterface
     ) {}
 
-    public function getAll()
+    public function index()
     {
-        return $this->tipoRespuestaRepositoryInterface->getAll();
+        return $this->tipoRespuestaRepositoryInterface->index();
     }
 }

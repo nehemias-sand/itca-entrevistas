@@ -4,13 +4,20 @@ namespace App\Repositories\implementations;
 
 use App\Models\CicloEstudio;
 use App\Repositories\CicloRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 
 class CicloMySqlRepository implements CicloRepositoryInterface
 {
-    public function index(array $pagination, array $filter) {
+    public function index(array $pagination, array $filter)
+    {
+        $idPerfil = Auth::user()->id_perfil;
+        $anioActual = now()->year;
+
         $ciclos = CicloEstudio::query();
 
-        if (isset($filter['anio'])) {
+        if ($idPerfil === 2) {
+            $ciclos->where('anio', '=', $anioActual);
+        } else if (isset($filter['anio'])) {
             $ciclos->where('anio', '=', $filter['anio']);
         }
 
@@ -21,18 +28,21 @@ class CicloMySqlRepository implements CicloRepositoryInterface
         return $ciclos->get();
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $ciclo = CicloEstudio::find($id);
         if (!$ciclo) return null;
 
         return $ciclo;
     }
 
-    public function store(array $data) {
+    public function store(array $data)
+    {
         return CicloEstudio::create($data);
     }
 
-    public function update($id, array $data) {
+    public function update($id, array $data)
+    {
         $ciclo = $this->show($id);
         if (!$ciclo) return null;
 
@@ -40,7 +50,8 @@ class CicloMySqlRepository implements CicloRepositoryInterface
         return $ciclo;
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $ciclo = $this->show($id);
         if (!$ciclo) return null;
 

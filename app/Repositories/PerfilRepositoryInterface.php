@@ -3,5 +3,5 @@
 namespace App\Repositories;
 
 interface PerfilRepositoryInterface {
-    public function getAll();
+    public function index();
 }

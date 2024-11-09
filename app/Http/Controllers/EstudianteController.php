@@ -52,6 +52,20 @@ class EstudianteController extends Controller
         return ApiResponseClass::sendResponse(new EstudianteResource($estudiante), null, 201);
     }
 
+    public function importarCSV(Request $request)
+    {
+        $request->validate([
+            'estudiantes_csv' => 'required|file|mimes:csv',
+        ]);
+
+        if (($handle = fopen($request->file('estudiantes_csv')->getRealPath(), 'r')) !== false) {
+            $this->estudianteService->importarDesdeCSV($handle);
+            return ApiResponseClass::sendResponse(null, 'Estudiantes importados exitosamente', 201);
+        }
+        
+        return ApiResponseClass::sendResponse(null, 'No se puedo abrir el archivo', 500);
+    }
+
     public function update($id, UpdateEstudianteRequest $request)
     {
         $data = $request->only([

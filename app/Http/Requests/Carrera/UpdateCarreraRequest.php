@@ -17,12 +17,12 @@ class UpdateCarreraRequest extends FormRequest
     {
         return [
             'nombre' => 'required|string',
-            'id_facultad' => 'required|interger|exists:facultades,id',
+            'id_facultad' => 'required|integer|exists:facultades,id',
             'seguimientos' => 'required|array|min:1',
-            'seguimientos.*.id_jornada' => 'required|interger|exists:jornadas,id',
-            'seguimientos.*.id_modalidad' => 'required|interger|exists:modalidades,id',
-            'seguimientos.*.id_regional' => 'required|interger|exists:regionales,id',
-            'seguimientos.*.id_coordinador' => 'required|interger|exists:docentes,id'
+            'seguimientos.*.id_jornada' => 'required|integer|exists:jornadas,id',
+            'seguimientos.*.id_modalidad' => 'required|integer|exists:modalidades,id',
+            'seguimientos.*.id_regional' => 'required|integer|exists:regionales,id',
+            'seguimientos.*.id_coordinador' => 'required|integer|exists:docentes,id'
         ];
     }
 

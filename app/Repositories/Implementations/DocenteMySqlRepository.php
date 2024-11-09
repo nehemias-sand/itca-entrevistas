@@ -11,9 +11,9 @@ class DocenteMySqlRepository implements DocenteRepositoryInterface{
     {
         $docentes = Docente::query();
 
-        if (isset($filter['nombresOrApellidos'])) {
-            $docentes->where('nombres', 'like', '%' . $filter['nombresOrApellidos'] . '%')
-            ->orWhere('apellidos', 'like', '%' . $filter['nombresOrApellidos'] . '%');
+        if (isset($filter['nombres_or_apellidos'])) {
+            $docentes->where('nombres', 'like', '%' . $filter['nombres_or_apellidos'] . '%')
+            ->orWhere('apellidos', 'like', '%' . $filter['nombres_or_apellidos'] . '%');
         }
 
         if($pagination['paginate'] === 'true') {

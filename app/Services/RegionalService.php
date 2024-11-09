@@ -10,8 +10,8 @@ class RegionalService
         private RegionalRepositoryInterface $regionalRepositoryInterface
     ) {}
 
-    public function getAll()
+    public function index()
     {
-        return $this->regionalRepositoryInterface->getAll();
+        return $this->regionalRepositoryInterface->index();
     }
 }

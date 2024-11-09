@@ -13,6 +13,21 @@ class CatalogoPreguntasResource extends JsonResource
             'id' => $this->id,
             'nombre' => $this->nombre,
             'descripcion' => $this->descripcion,
+            'preguntas' => $this->preguntas->map(function ($pregunta) {
+                return [
+                    'id' => $pregunta->id,
+                    'enunciado' => $pregunta->enunciado,
+                    'tipo_respuesta' => $pregunta->tipoRespuesta->nombre,
+                ];
+            }),
+            'ciclos' => $this->ciclos->map(function ($ciclo) {
+                return [
+                    'id' => $ciclo->id,
+                    'codigo' => $ciclo->codigo,
+                    'anio' => $ciclo->anio,
+                    'numero' => $ciclo->num,
+                ];
+            }),
         ];
     }
 
@@ -22,6 +37,7 @@ class CatalogoPreguntasResource extends JsonResource
             'id' => $this->id,
             'nombre' => $this->nombre,
             'descripcion' => $this->descripcion,
+            'preguntas' => $this->preguntas,
         ];
     }
 }

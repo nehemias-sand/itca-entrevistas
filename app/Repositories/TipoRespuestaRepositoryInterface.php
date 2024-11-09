@@ -3,5 +3,5 @@
 namespace App\Repositories;
 
 interface TipoRespuestaRepositoryInterface {
-    public function getAll();
+    public function index();
 }

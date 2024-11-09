@@ -7,7 +7,7 @@ use App\Repositories\TipoRespuestaRepositoryInterface;
 
 class TipoRespuestaMySqlRepository implements TipoRespuestaRepositoryInterface
 {
-    public function getAll(){
+    public function index(){
         return TipoRespuesta::all();
     }
 }

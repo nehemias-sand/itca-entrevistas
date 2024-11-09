@@ -5,12 +5,20 @@ namespace App\Repositories\implementations;
 use App\Models\Estudiante;
 use App\Models\SeguimientoCarrera;
 use App\Repositories\EstudianteRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 
 class EstudianteMySqlRepository implements EstudianteRepositoryInterface
 {
     public function index(array $pagination, array $filter)
     {
+        $idPerfil = Auth::user()->id_perfil;
         $estudiantes = Estudiante::query();
+
+        if ($idPerfil === 2) {
+            $estudiantes->whereHas('carreras', function ($query) {
+                $query->where('evaluado', false);
+            });
+        }
 
         if (isset($filter['nombresOrApellidos'])) {
             $estudiantes->where('nombres', 'like', '%' . $filter['nombresOrApellidos'] . '%')

@@ -10,8 +10,8 @@ class JornadaService
         private JornadaRepositoryInterface $jornadaRepositoryInterface
     ) {}
 
-    public function getAll()
+    public function index()
     {
-        return $this->jornadaRepositoryInterface->getAll();
+        return $this->jornadaRepositoryInterface->index();
     }
 }

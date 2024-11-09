@@ -10,8 +10,8 @@ class ModalidadService
         private ModalidadRepositoryInterface $modalidadRepositoryInterface
     ) {}
 
-    public function getAll()
+    public function index()
     {
-        return $this->modalidadRepositoryInterface->getAll();
+        return $this->modalidadRepositoryInterface->index();
     }
 }

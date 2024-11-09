@@ -51,21 +51,21 @@ class CarreraMySqlRepository implements CarreraRepositoryInterface
 
         if (isset($data['carrera'])) {
             if (isset($data['carrera']['nombre']))
-                $dataToUpdate['nombre'] = $data['nombre'];
+                $dataToUpdate['nombre'] = $data['carrera']['nombre'];
 
             if (isset($data['carrera']['id_facultad']))
-                $dataToUpdate['id_facultad'] = $data['id_facultad'];
+                $dataToUpdate['id_facultad'] = $data['carrera']['id_facultad'];
         }
 
         $carrera->update($dataToUpdate);
 
         if (isset($data['seguimientos'])) {
-            $seguimientos = $data['seguimientos'];
-
-            foreach ($seguimientos as $seguimiento) {
-                $carrera->seguimientos()->update($seguimiento);
+            $carrera->seguimientos()->delete();
+    
+            foreach ($data['seguimientos'] as $seguimientoData) {
+                $carrera->seguimientos()->create($seguimientoData);
             }
-        }
+        }    
 
         return $carrera;
     }

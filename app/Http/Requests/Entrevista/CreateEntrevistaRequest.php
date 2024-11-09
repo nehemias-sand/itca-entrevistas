@@ -29,10 +29,49 @@ class CreateEntrevistaRequest extends FormRequest
                 'integer',
                 Rule::exists('ciclo_estudios', 'id')->whereNull('deleted_at')
             ],
+            'id_catalogo' => [
+                'required',
+                'integer',
+                Rule::exists('catalogo_preguntas', 'id')->whereNull('deleted_at')
+            ],
+            'id_carrera' => [
+                'required',
+                'integer',
+                Rule::exists('carreras', 'id')->whereNull('deleted_at')
+            ],
             'seguimientos' => 'required|array',
             'seguimientos.*.id_pregunta' => 'required|exists:preguntas,id',
             'seguimientos.*.respuesta' => 'required|string'
         ];
+    }
+
+    protected function withValidator(Validator $validator)
+    {
+        $validator->after(function ($validator) {
+            $idCiclo = $this->input('id_ciclo');
+            $idCatalogo = $this->input('id_catalogo');
+            $seguimientos = $this->input('seguimientos', []);
+
+            // Validar que el catálogo pertenece al ciclo
+            $ciclo = CicloEstudio::with('catalogos')->find($idCiclo);
+            if (!$ciclo || !$ciclo->catalogos->contains('id', $idCatalogo)) {
+                $validator->errors()->add('id_catalogo', 'El catálogo no pertenece al ciclo proporcionado.');
+            }
+
+            // Validar que cada pregunta pertenece al catálogo
+            $catalogo = CatalogoPregunta::with('preguntas')->find($idCatalogo);
+            if ($catalogo) {
+                $preguntasValidas = $catalogo->preguntas->pluck('id')->toArray();
+                foreach ($seguimientos as $index => $seguimiento) {
+                    if (!in_array($seguimiento['id_pregunta'], $preguntasValidas)) {
+                        $validator->errors()->add(
+                            "seguimientos.$index.id_pregunta",
+                            "La pregunta con ID {$seguimiento['id_pregunta']} no pertenece al catálogo proporcionado."
+                        );
+                    }
+                }
+            }
+        });
     }
 
     public function messages(): array

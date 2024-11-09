@@ -10,7 +10,7 @@ class FacultadService
         private FacultadRepositoryInterface $facultadRepositoryInterface
     ) {}
 
-    public function getAll(){
-        return $this->facultadRepositoryInterface->getAll();
+    public function index(){
+        return $this->facultadRepositoryInterface->index();
     }
 }

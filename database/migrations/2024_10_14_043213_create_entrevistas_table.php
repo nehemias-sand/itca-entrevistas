@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('id_docente')->constrained('docentes');
             $table->foreignId('id_estudiante')->constrained('estudiantes');
             $table->foreignId('id_ciclo')->constrained('ciclo_estudios');
+            $table->foreignId('id_catalogo')->constrained('catalogo_preguntas');
+            $table->foreignId('id_carrera')->constrained('carreras');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
             $table->softDeletes();

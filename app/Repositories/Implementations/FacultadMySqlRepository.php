@@ -7,7 +7,7 @@ use App\Repositories\FacultadRepositoryInterface;
 
 class FacultadMySqlRepository implements FacultadRepositoryInterface
 {
-    public function getAll(){
+    public function index(){
         return Facultad::all();
     }
 }

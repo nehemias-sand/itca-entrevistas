@@ -26,11 +26,13 @@ class CreateCatalogoPreguntasRequest extends FormRequest
                 'min:1',
                 Rule::exists('preguntas', 'id')->whereNull('deleted_at')
             ],
-            'id_ciclo' => [
-                'required',
+            'ids_ciclo' => 'required|array|min:1',
+            'ids_ciclo.*' => [
                 'integer',
+                'distinct',
+                'min:1',
                 Rule::exists('ciclo_estudios', 'id')->whereNull('deleted_at')
-            ]
+            ],
         ];
     }
 
@@ -48,9 +50,13 @@ class CreateCatalogoPreguntasRequest extends FormRequest
             'ids_pregunta.*.distinct' => 'El campo :attribute debe ser único, no puede haber duplicados',
             'ids_pregunta.*.min' => 'El campo de :attribute debe ser al menos 1',
             'ids_pregunta.*.exists' => 'El campo :attribute debe ser un id valido',
-            'id_ciclo.required' => 'El campo :attribute es obligatorio',
-            'id_ciclo.integer' => 'El campo :attribute debe ser un entero',
-            'id_ciclo.exists' => 'El campo :attribute debe ser un id valido',
+            'ids_ciclo.required' => 'El campo :attribute es obligatorio',
+            'ids_ciclo.array' => 'El campo :attribute debe ser un array',
+            'ids_ciclo.min' => 'El campo :attribute debe tener al menos un elemento',
+            'ids_ciclo.*.integer' => 'El campo :attribute debe ser un entero',
+            'ids_ciclo.*.distinct' => 'El campo :attribute debe ser único, no puede haber duplicados',
+            'ids_ciclo.*.min' => 'El campo de :attribute debe ser al menos 1',
+            'ids_ciclo.*.exists' => 'El campo :attribute debe ser un id valido',
         ];
     }
 

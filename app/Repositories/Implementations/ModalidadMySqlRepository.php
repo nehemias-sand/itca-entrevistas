@@ -3,10 +3,11 @@
 namespace App\Repositories\Implementations;
 
 use App\Models\Modalidad;
+use App\Repositories\ModalidadRepositoryInterface;
 
-class ModalidadMySqlRepository
+class ModalidadMySqlRepository implements ModalidadRepositoryInterface
 {
-    public function getAll(){
+    public function index(){
         return Modalidad::all();
     }
 }

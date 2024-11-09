@@ -41,7 +41,7 @@ class CatalogoPreguntasController extends Controller
             'nombre',
             'descripcion',
             'ids_pregunta',
-            'id_ciclo'
+            'ids_ciclo'
         ]);
 
         $catalogo = $this->catalogoPreguntaService->store($data);
@@ -54,7 +54,7 @@ class CatalogoPreguntasController extends Controller
             'nombre',
             'descripcion',
             'ids_pregunta',
-            'id_ciclo'
+            'ids_ciclo'
         ]);
 
         $catalogo = $this->catalogoPreguntaService->update($id, $data);

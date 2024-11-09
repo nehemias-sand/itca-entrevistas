@@ -4,5 +4,5 @@ namespace App\Repositories;
 
 interface CargoRepositoryInterface {
 
-    public function getAll();
+    public function index();
 }

@@ -3,5 +3,5 @@
 namespace App\Repositories;
 
 interface RegionalRepositoryInterface {
-    public function getAll();
+    public function index();
 }

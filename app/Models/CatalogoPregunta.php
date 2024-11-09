@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CatalogoPregunta extends Model
@@ -28,8 +27,7 @@ class CatalogoPregunta extends Model
 
     public function ciclos(): BelongsToMany
     {
-        return $this->belongsToMany(Pregunta::class, 'seguimiento_catalogo_ciclos', 'id_catalogo', 'id_ciclo')
-                    ->withTimestamps()
-                    ->whereNull('seguimiento_catalogo_preguntas.deleted_at');
+        return $this->belongsToMany(CicloEstudio::class, 'seguimiento_catalogo_ciclos', 'id_catalogo', 'id_ciclo')
+                    ->withTimestamps();
     }
 }

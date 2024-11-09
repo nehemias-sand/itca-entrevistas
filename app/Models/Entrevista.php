@@ -19,7 +19,9 @@ class Entrevista extends Model
         'observaciones',
         'id_docente',
         'id_estudiante',
-        'id_ciclo'
+        'id_ciclo',
+        'id_catalogo',
+        'id_carrera'
     ];
 
     public function docente(): BelongsTo
@@ -35,6 +37,16 @@ class Entrevista extends Model
     public function ciclo(): BelongsTo
     {
         return $this->belongsTo(CicloEstudio::class, 'id_ciclo', 'id');
+    }
+
+    public function catalogo(): BelongsTo
+    {
+        return $this->belongsTo(CatalogoPregunta::class, 'id_catalogo', 'id');
+    }
+
+    public function carrera(): BelongsTo
+    {
+        return $this->belongsTo(Carrera::class, 'id_carrera', 'id');
     }
 
     public function preguntas(): BelongsToMany

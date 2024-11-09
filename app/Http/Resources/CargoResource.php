@@ -5,14 +5,13 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PreguntaResource extends JsonResource
+class CargoResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,
-            'enunciado' => $this->enunciado,
-            'tipo_respuesta' => $this->tipoRespuesta->nombre,
+            'nombre' => $this->nombre,
         ];
     }
 
@@ -20,8 +19,7 @@ class PreguntaResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'enunciado' => $this->enunciado,
-            'tipo_respuesta' => $this->tipoRespuesta->nombre,
+            'nombre' => $this->nombre,
         ];
     }
 }

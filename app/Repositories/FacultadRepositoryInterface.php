@@ -3,5 +3,5 @@
 namespace App\Repositories;
 
 interface FacultadRepositoryInterface {
-    public function getAll();
+    public function index();
 }

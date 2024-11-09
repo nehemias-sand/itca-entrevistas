@@ -7,7 +7,7 @@ use App\Repositories\JornadaRepositoryInterface;
 
 class JornadaMySqlRepository implements JornadaRepositoryInterface
 {
-    public function getAll(){
+    public function index(){
         return Jornada::all();
     }
 }

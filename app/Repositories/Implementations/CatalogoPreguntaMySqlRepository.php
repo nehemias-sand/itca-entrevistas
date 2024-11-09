@@ -32,11 +32,11 @@ class CatalogoPreguntaMySqlRepository implements CatalogoPreguntaRepositoryInter
         $nombre = $data['nombre'];
         $descripcion = $data['descripcion'];
         $idsPregunta = $data['ids_pregunta'];
-        $idCiclo = $data['id_ciclo'];
+        $idsCiclo = $data['ids_ciclo'];
 
         $catalogo = CatalogoPregunta::create(compact('nombre', 'descripcion'));
         $catalogo->preguntas()->sync($idsPregunta);
-        $catalogo->ciclos()->sync([$idCiclo]);
+        $catalogo->ciclos()->sync($idsCiclo);
 
         return $catalogo;
     }
@@ -56,9 +56,9 @@ class CatalogoPreguntaMySqlRepository implements CatalogoPreguntaRepositoryInter
             $catalogo->preguntas()->sync($idsPregunta);
         }
 
-        if (isset($data['id_ciclo'])) {
-            $idCiclo = $data['id_ciclo'];
-            $catalogo->ciclos()->sync([$idCiclo]);
+        if (isset($data['ids_ciclo'])) {
+            $idsCiclo = $data['ids_ciclo'];
+            $catalogo->ciclos()->sync($idsCiclo);
         }
 
         return $catalogo;

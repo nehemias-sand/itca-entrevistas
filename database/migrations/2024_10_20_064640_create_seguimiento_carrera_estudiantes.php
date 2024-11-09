@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('seguimiento_carrera_estudiantes', function (Blueprint $table) {
             $table->foreignId('id_seguimiento_carrera')->constrained('seguimiento_carreras');
             $table->foreignId('id_estudiante')->constrained('estudiantes');
-            $table->boolean('activo')->default(true);
+            $table->boolean('evaluado')->default(false);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
             $table->softDeletes();

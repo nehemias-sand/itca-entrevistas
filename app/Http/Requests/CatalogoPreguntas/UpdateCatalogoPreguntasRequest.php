@@ -17,35 +17,46 @@ class UpdateCatalogoPreguntasRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'string',
-            'descripcion' => 'string',
-            'ids_pregunta' => 'array|min:1',
+            'nombre' => 'required|string',
+            'descripcion' => 'required|string',
+            'ids_pregunta' => 'required|array|min:1',
             'ids_pregunta.*' => [
                 'integer',
                 'distinct',
                 'min:1',
                 Rule::exists('preguntas', 'id')->whereNull('deleted_at')
             ],
-            'id_ciclo' => [
+            'ids_ciclo' => 'required|array|min:1',
+            'ids_ciclo.*' => [
                 'integer',
+                'distinct',
+                'min:1',
                 Rule::exists('ciclo_estudios', 'id')->whereNull('deleted_at')
-            ]
+            ],
         ];
     }
 
     public function messages(): array
     {
         return [
+            'nombre.required' => 'El campo :attribute es obligatorio',
             'nombre.string' => 'El campo :attribute debe ser una cadena',
+            'descripcion.required' => 'El campo :attribute es obligatorio',
             'descripcion.string' => 'El campo :attribute debe ser una cadena',
+            'ids_pregunta.required' => 'El campo :attribute es obligatorio',
             'ids_pregunta.array' => 'El campo :attribute debe ser un array',
             'ids_pregunta.min' => 'El campo :attribute debe tener al menos un elemento',
             'ids_pregunta.*.integer' => 'El campo :attribute debe ser un entero',
             'ids_pregunta.*.distinct' => 'El campo :attribute debe ser único, no puede haber duplicados',
             'ids_pregunta.*.min' => 'El campo de :attribute debe ser al menos 1',
             'ids_pregunta.*.exists' => 'El campo :attribute debe ser un id valido',
-            'id_ciclo.integer' => 'El campo :attribute debe ser un entero',
-            'id_ciclo.exists' => 'El campo :attribute debe ser un id valido',
+            'ids_ciclo.required' => 'El campo :attribute es obligatorio',
+            'ids_ciclo.array' => 'El campo :attribute debe ser un array',
+            'ids_ciclo.min' => 'El campo :attribute debe tener al menos un elemento',
+            'ids_ciclo.*.integer' => 'El campo :attribute debe ser un entero',
+            'ids_ciclo.*.distinct' => 'El campo :attribute debe ser único, no puede haber duplicados',
+            'ids_ciclo.*.min' => 'El campo de :attribute debe ser al menos 1',
+            'ids_ciclo.*.exists' => 'El campo :attribute debe ser un id valido',
         ];
     }
 

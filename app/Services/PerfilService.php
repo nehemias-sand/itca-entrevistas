@@ -13,8 +13,8 @@ class PerfilService
         private PerfilRepositoryInterface $perfilRepositoryInterface
     ) {}
 
-    public function getAll()
+    public function index()
     {
-        return $this->perfilRepositoryInterface->getAll();
+        return $this->perfilRepositoryInterface->index();
     }
 }

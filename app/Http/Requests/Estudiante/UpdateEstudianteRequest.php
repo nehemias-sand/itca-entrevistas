@@ -41,6 +41,21 @@ class UpdateEstudianteRequest extends FormRequest
         ];
     }
 
+    public function withValidator(Validator $validator)
+    {
+        $validator->after(function ($validator) {
+            $seguimientoCarrera = SeguimientoCarrera::where('id_carrera', $this->id_carrera)
+                ->where('id_jornada', $this->id_jornada)
+                ->where('id_modalidad', $this->id_modalidad)
+                ->where('id_regional', $this->id_regional)
+                ->first();
+
+            if (!$seguimientoCarrera) {
+                $validator->errors()->add('id_carrera', 'La combinación de carrera, jornada, modalidad y regional es inválida.');
+            }
+        });
+    }
+
     public function messages(): array
     {
         return [

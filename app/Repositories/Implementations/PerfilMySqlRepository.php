@@ -7,7 +7,7 @@ use App\Repositories\PerfilRepositoryInterface;
 
 class PerfilMySqlRepository implements PerfilRepositoryInterface
 {
-    public function getAll(){
+    public function index(){
         return Perfil::all();
     }
 }

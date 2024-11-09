@@ -7,7 +7,7 @@ use App\Repositories\RegionalRepositoryInterface;
 
 class RegionalMySqlRepository implements RegionalRepositoryInterface
 {
-    public function getAll(){
+    public function index(){
         return Regional::all();
     }
 }

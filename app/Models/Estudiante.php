@@ -27,9 +27,8 @@ class Estudiante extends Model
 
     public function carreras(): BelongsToMany
     {
-        return $this->belongsToMany(Carrera::class, 'seguimiento_carrera_estudiantes', 'id_estudiante', 'id_seguimiento_carrera')
-            ->withPivot('activo')
-            ->withTimestamps()
-            ->whereNull('seguimiento_carreras.deleted_at');
+        return $this->belongsToMany(SeguimientoCarrera::class, 'seguimiento_carrera_estudiantes', 'id_estudiante', 'id_seguimiento_carrera')
+            ->withPivot('evaluado')
+            ->withTimestamps();
     }
 }

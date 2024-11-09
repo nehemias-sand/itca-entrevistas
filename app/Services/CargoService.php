@@ -10,7 +10,7 @@ class CargoService
         private CargoRepositoryInterface $cargoRepositoryInterface
     ) {}
 
-    public function getAll(){
-        return $this->cargoRepositoryInterface->getAll();
+    public function index(){
+        return $this->cargoRepositoryInterface->index();
     } 
 }

@@ -3,5 +3,5 @@
 namespace App\Repositories;
 
 interface ModalidadRepositoryInterface {
-    public function getAll();
+    public function index();
 }

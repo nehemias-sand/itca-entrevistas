@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('carreras', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('nombre')->unique();
             $table->foreignId('id_facultad')->constrained('facultades');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();

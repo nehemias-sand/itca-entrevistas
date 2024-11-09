@@ -7,7 +7,7 @@ use App\Repositories\CargoRepositoryInterface;
 
 class CargoMySqlRepository implements CargoRepositoryInterface
 {
-    public function getAll(){
+    public function index(){
         return Cargo::all();
     }
 }
