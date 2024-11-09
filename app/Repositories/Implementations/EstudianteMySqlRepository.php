@@ -20,9 +20,9 @@ class EstudianteMySqlRepository implements EstudianteRepositoryInterface
             });
         }
 
-        if (isset($filter['nombresOrApellidos'])) {
-            $estudiantes->where('nombres', 'like', '%' . $filter['nombresOrApellidos'] . '%')
-                ->orWhere('apellidos', 'like', '%' . $filter['nombresOrApellidos'] . '%');
+        if (isset($filter['nombres_or_apellidos'])) {
+            $estudiantes->where('nombres', 'like', '%' . $filter['nombres_or_apellidos'] . '%')
+                ->orWhere('apellidos', 'like', '%' . $filter['nombres_or_apellidos'] . '%');
         }
 
         if ($pagination['paginate'] === 'true') {

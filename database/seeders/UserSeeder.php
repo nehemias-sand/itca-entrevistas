@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             [
                 'username' => 'admin',
                 'email' => 'admin@itca.edu.sv',
-                'password' => Hash::make('itca123'),
+                'password' => Hash::make('4dm1n123'),
                 'id_perfil' => 1,
             ]
         ]);

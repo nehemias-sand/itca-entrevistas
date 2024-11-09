@@ -10,6 +10,7 @@ class EntrevistaResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'aprobada' => $this->aprobada,
             'observaciones' => $this->observaciones,
             'docente' => new DocenteResource($this->whenLoaded('docente')),
@@ -20,6 +21,7 @@ class EntrevistaResource extends JsonResource
     public function toJson($options = 0)
     {
         return [
+            'id' => $this->id,
             'aprobada' => $this->aprobada,
             'observaciones' => $this->observaciones,
             'docente' => new DocenteResource($this->whenLoaded('docente')),

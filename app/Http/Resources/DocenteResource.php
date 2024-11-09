@@ -25,6 +25,7 @@ class DocenteResource extends JsonResource
             'carnet' => $this->carnet,
             'nombres' => $this->nombres,
             'apellidos' => $this->apellidos,
+            'nombre_completo' => $this->nombres . ' ' . $this->apellidos,
         ];
     }
 }
