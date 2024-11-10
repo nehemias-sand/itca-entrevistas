@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\Estudiante;
+use App\Models\SeguimientoCarrera;
 use App\Repositories\EstudianteRepositoryInterface;
 
 class EstudianteService
@@ -35,6 +37,13 @@ class EstudianteService
                 ->first();
 
             if ($seguimientoCarrera) {
+                $estudiante = Estudiante::query()->where('nombres', '=', $data[0])
+                    ->where('apellidos', '=', $data[1])->first();
+                    
+                if ($estudiante) {
+                    $this->delete($estudiante->id);
+                }
+
                 $this->store([
                     'nombres' => $data[0],
                     'apellidos'  => $data[1],
