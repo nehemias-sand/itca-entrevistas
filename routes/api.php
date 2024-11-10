@@ -80,8 +80,8 @@ Route::middleware('jwt', 'check.profile:ADMIN')->prefix('admin')->group(function
     //Estudiante
     Route::post('/estudiante/register', [EstudianteController::class, 'store']);
     Route::post('/estudiante/import', [EstudianteController::class, 'importarCSV']);
-    Route::put('/estudiante/{id}', [DocenteController::class, 'update']);
-    Route::delete('/estudiante/{id}', [DocenteController::class, 'delete']);
+    Route::put('/estudiante/{id}', [EstudianteController::class, 'update']);
+    Route::delete('/estudiante/{id}', [EstudianteController::class, 'delete']);
 });
 
 Route::middleware('jwt', 'check.profile:DOCENTE')->prefix('docente')->group(function () {

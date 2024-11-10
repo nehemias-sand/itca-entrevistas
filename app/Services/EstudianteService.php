@@ -28,15 +28,23 @@ class EstudianteService
     public function importarCSV($handle)
     {
         while (($data = fgetcsv($handle, 1000, ',')) !== false) {
-            $this->store([
-                'nombres' => $data[0],
-                'apellidos'  => $data[1],
-                'correo'   => $data[2],
-                'id_carrera'   => $data[3],
-                'id_jornada'   => $data[4],
-                'id_modalidad'   => $data[5],
-                'id_regional'   => $data[6],
-            ]);
+            $seguimientoCarrera = SeguimientoCarrera::where('id_carrera', $data[3])
+                ->where('id_jornada', $data[4])
+                ->where('id_modalidad', $data[5])
+                ->where('id_regional', $data[6])
+                ->first();
+
+            if ($seguimientoCarrera) {
+                $this->store([
+                    'nombres' => $data[0],
+                    'apellidos'  => $data[1],
+                    'correo'   => $data[2],
+                    'id_carrera'   => $data[3],
+                    'id_jornada'   => $data[4],
+                    'id_modalidad'   => $data[5],
+                    'id_regional'   => $data[6],
+                ]);
+            }
         }
 
         fclose($handle);

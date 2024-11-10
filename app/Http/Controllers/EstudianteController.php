@@ -59,7 +59,7 @@ class EstudianteController extends Controller
         ]);
 
         if (($handle = fopen($request->file('estudiantes_csv')->getRealPath(), 'r')) !== false) {
-            $this->estudianteService->importarDesdeCSV($handle);
+            $this->estudianteService->importarCSV($handle);
             return ApiResponseClass::sendResponse(null, 'Estudiantes importados exitosamente', 201);
         }
         
