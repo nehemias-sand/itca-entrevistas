@@ -29,6 +29,7 @@ class Estudiante extends Model
     {
         return $this->belongsToMany(SeguimientoCarrera::class, 'seguimiento_carrera_estudiantes', 'id_estudiante', 'id_seguimiento_carrera')
             ->withPivot('evaluado')
-            ->withTimestamps();
+            ->withTimestamps()
+            ->where('evaluado', false);
     }
 }

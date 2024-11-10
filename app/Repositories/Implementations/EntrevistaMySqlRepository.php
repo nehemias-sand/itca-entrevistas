@@ -14,7 +14,8 @@ class EntrevistaMySqlRepository implements EntrevistaRepositoryInterface
         $estudiante = Estudiante::find($idEstudiante);
 
         if ($estudiante) {
-            $estudiante->carreras()->updateExistingPivot(null, ['evaluado' => true]);
+            $carreras = $estudiante->carreras->pluck('id')->toArray();
+            $estudiante->carreras()->sync(array_fill_keys($carreras, ['evaluado' => true]));
         }
 
         return Entrevista::create($data);

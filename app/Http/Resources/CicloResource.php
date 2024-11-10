@@ -16,7 +16,8 @@ class CicloResource extends JsonResource
             'id' => $this->id,
             'codigo' => $this->codigo,
             'anio' => $this->anio,
-            'num' => $this->num
+            'num' => $this->num,
+            'catalogos' => []
         ];
 
         if ($idPerfil === 2) {
@@ -28,7 +29,7 @@ class CicloResource extends JsonResource
                         return [
                             'id' => $pregunta->id,
                             'enunciado' => $pregunta->enunciado,
-                            'tipo_pregunta' => [
+                            'tipo_respuesta' => [
                                 'id' => $pregunta->tipoRespuesta->id,
                                 'nombre' => $pregunta->tipoRespuesta->nombre,
                             ],
@@ -49,7 +50,8 @@ class CicloResource extends JsonResource
             'id' => $this->id,
             'codigo' => $this->codigo,
             'anio' => $this->anio,
-            'num' => $this->num
+            'num' => $this->num,
+            'catalogos' => []
         ];
 
         if ($idPerfil === 2) {

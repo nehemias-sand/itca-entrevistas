@@ -16,7 +16,7 @@ class CicloMySqlRepository implements CicloRepositoryInterface
         $ciclos = CicloEstudio::query();
 
         if ($idPerfil === 2) {
-            $ciclos->where('anio', '=', $anioActual);
+            $ciclos->where('anio', '>=', $anioActual);
         } else if (isset($filter['anio'])) {
             $ciclos->where('anio', '=', $filter['anio']);
         }

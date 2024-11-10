@@ -77,12 +77,6 @@ class EstudianteMySqlRepository implements EstudianteRepositoryInterface
         if(isset($data['correo'])) $dataToUpdate['correo'] = $data['correo'];
 
         $estudiante->update($dataToUpdate);
-
-        if(isset($data['id_seguimiento_carrera'])) {
-
-        }
-
-        $estudiante->update($data);
         return $estudiante;
     }
 

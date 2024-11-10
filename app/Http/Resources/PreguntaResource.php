@@ -12,7 +12,10 @@ class PreguntaResource extends JsonResource
         return [
             'id' => $this->id,
             'enunciado' => $this->enunciado,
-            'tipo_respuesta' => $this->tipoRespuesta->nombre,
+            'tipo_respuesta' => [
+                'id' => $this->tipoRespuesta->id,
+                'nombre' => $this->tipoRespuesta->nombre
+            ],
         ];
     }
 
@@ -21,7 +24,10 @@ class PreguntaResource extends JsonResource
         return [
             'id' => $this->id,
             'enunciado' => $this->enunciado,
-            'tipo_respuesta' => $this->tipoRespuesta->nombre,
+            'tipo_respuesta' => [
+                'id' => $this->tipoRespuesta->id,
+                'nombre' => $this->tipoRespuesta->nombre
+            ],
         ];
     }
 }

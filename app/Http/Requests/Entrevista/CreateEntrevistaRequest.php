@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Entrevista;
 
+use App\Models\CatalogoPregunta;
+use App\Models\CicloEstudio;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -78,7 +80,7 @@ class CreateEntrevistaRequest extends FormRequest
     {
         return [
             'aprobada.required' => 'El campo :attribute es obligatorio',
-            'aprobada.string' => 'El campo :attribute debe ser booleano',
+            'aprobada.boolean' => 'El campo :attribute debe ser booleano',
             'observaciones.required' => 'El campo :attribute es obligatorio',
             'observaciones.string' => 'El campo :attribute debe ser una cadena',
             'id_estudiante.required' => 'El campo :attribute es obligatorio',

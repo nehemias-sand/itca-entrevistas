@@ -33,7 +33,7 @@ class EstudianteResource extends JsonResource
                     'regional' => [
                         'id' => $seguimientoCarrera->regional->id,
                         'nombre' => $seguimientoCarrera->regional->nombre,
-                        'telefono' => $seguimientoCarrera->regional->nombre,
+                        'telefono' => $seguimientoCarrera->regional->telefono,
                     ],
                     'evaluado' => $seguimientoCarrera->pivot->evaluado
                 ];
@@ -67,7 +67,7 @@ class EstudianteResource extends JsonResource
                     'regional' => [
                         'id' => $seguimientoCarrera->regional->id,
                         'nombre' => $seguimientoCarrera->regional->nombre,
-                        'telefono' => $seguimientoCarrera->regional->nombre,
+                        'telefono' => $seguimientoCarrera->regional->telefono,
                     ],
                     'evaluado' => $seguimientoCarrera->pivot->evaluado
                 ];

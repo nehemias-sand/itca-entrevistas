@@ -72,9 +72,6 @@ class EstudianteController extends Controller
             'nombres',
             'apellidos',
             'correo',
-            'id_carrera',
-            'id_jornada',
-            'id_modalidad',
         ]);
 
         $estudiante = $this->estudianteService->update($id, $data);

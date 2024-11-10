@@ -24,6 +24,8 @@ Route::middleware('jwt')->prefix('user')->group(function () {
 Route::middleware('jwt', 'check.profile:ADMIN,DOCENTE')->group(function () {
     Route::get('/ciclo', [CicloController::class, 'index']);
     Route::get('/ciclo/{id}', [CicloController::class, 'show']);
+    Route::get('/estudiante', [EstudianteController::class, 'index']);
+    Route::get('/estudiante/{id}', [EstudianteController::class, 'show']);
 });
 
 Route::middleware('jwt', 'check.profile:ADMIN')->prefix('admin')->group(function () {
@@ -76,8 +78,6 @@ Route::middleware('jwt', 'check.profile:ADMIN')->prefix('admin')->group(function
     Route::delete('/docente/{id}', [DocenteController::class, 'delete']);
 
     //Estudiante
-    Route::get('/estudiante', [EstudianteController::class, 'index']);
-    Route::get('/estudiante/{id}', [EstudianteController::class, 'show']);
     Route::post('/estudiante/register', [EstudianteController::class, 'store']);
     Route::post('/estudiante/import', [EstudianteController::class, 'importarCSV']);
     Route::put('/estudiante/{id}', [DocenteController::class, 'update']);
@@ -86,5 +86,5 @@ Route::middleware('jwt', 'check.profile:ADMIN')->prefix('admin')->group(function
 
 Route::middleware('jwt', 'check.profile:DOCENTE')->prefix('docente')->group(function () {
     //Entrevista
-    Route::post('/entrevista/register', [EntrevistaController::class, 'register']);
+    Route::post('/entrevista', [EntrevistaController::class, 'register']);
 });
