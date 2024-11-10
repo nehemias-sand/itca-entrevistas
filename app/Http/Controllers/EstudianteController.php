@@ -55,12 +55,12 @@ class EstudianteController extends Controller
     public function importarCSV(Request $request)
     {
         $request->validate([
-            'estudiantes_csv' => 'required|file|mimes:csv',
+            'estudiantes_csv' => 'required|file|mimes:csv,txt',
         ]);
 
         if (($handle = fopen($request->file('estudiantes_csv')->getRealPath(), 'r')) !== false) {
             $this->estudianteService->importarCSV($handle);
-            return ApiResponseClass::sendResponse(null, 'Estudiantes importados exitosamente', 201);
+            return ApiResponseClass::sendResponse(null, null, 204);
         }
         
         return ApiResponseClass::sendResponse(null, 'No se puedo abrir el archivo', 500);

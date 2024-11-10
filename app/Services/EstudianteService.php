@@ -29,6 +29,9 @@ class EstudianteService
 
     public function importarCSV($handle)
     {
+        // Saltar encabezados
+        fgetcsv($handle, 1000, ',');
+
         while (($data = fgetcsv($handle, 1000, ',')) !== false) {
             $seguimientoCarrera = SeguimientoCarrera::where('id_carrera', $data[3])
                 ->where('id_jornada', $data[4])
