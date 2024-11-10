@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\implementations;
+namespace App\Repositories\Implementations;
 
 use App\Models\CicloEstudio;
 use App\Repositories\CicloRepositoryInterface;

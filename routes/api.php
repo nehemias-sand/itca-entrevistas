@@ -26,6 +26,8 @@ Route::middleware('jwt', 'check.profile:ADMIN,DOCENTE')->group(function () {
     Route::get('/ciclo/{id}', [CicloController::class, 'show']);
     Route::get('/estudiante', [EstudianteController::class, 'index']);
     Route::get('/estudiante/{id}', [EstudianteController::class, 'show']);
+    Route::get('/entrevista/resultados', [EntrevistaController::class, 'index']);
+    Route::get('/entrevista/export', [EntrevistaController::class, 'exportEntrevistas']);
 });
 
 Route::middleware('jwt', 'check.profile:ADMIN')->prefix('admin')->group(function () {

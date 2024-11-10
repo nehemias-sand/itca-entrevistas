@@ -52,6 +52,7 @@ class Entrevista extends Model
     public function preguntas(): BelongsToMany
     {
         return $this->belongsToMany(Pregunta::class, 'seguimiento_entrevistas', 'id_entrevista', 'id_pregunta')
-            ->using(SeguimientoEntrevista::class);
+            ->using(SeguimientoEntrevista::class)
+            ->withPivot('respuesta');
     }
 }

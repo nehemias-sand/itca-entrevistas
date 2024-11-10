@@ -12,6 +12,10 @@ class EntrevistaService
         private SeguimientoEntrevistaRepositoryInterface $seguimientoEntrevistaRepositoryInterface
     ) {}
 
+    public function index(array $pagination, array $filter) {
+        return $this->entrevistaRepositoryInterface->index($pagination, $filter);
+    }
+
     public function registrarEntrevista(array $entrevistaData, array $seguimientoData)
     {
         $entrevista = $this->entrevistaRepositoryInterface->create($entrevistaData);
