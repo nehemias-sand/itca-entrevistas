@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Estudiante;
 
+use App\Models\SeguimientoCarrera;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;

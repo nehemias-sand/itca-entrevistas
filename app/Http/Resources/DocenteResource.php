@@ -15,6 +15,19 @@ class DocenteResource extends JsonResource
             'nombres' => $this->nombres,
             'apellidos' => $this->apellidos,
             'nombre_completo' => $this->nombres . ' ' . $this->apellidos,
+            'usuario' => [
+                'id' => $this->user->id,
+                'email' => $this->user->email,
+            ],
+            'cargo' => [
+                'id' => $this->cargo->id,
+                'nombre' => $this->cargo->nombre,
+            ],
+            'facultad' => [
+                'id' => $this->facultad->id,
+                'codigo' => $this->facultad->codigo,
+                'nombre' => $this->facultad->nombre,
+            ],
         ];
     }
 
@@ -26,6 +39,19 @@ class DocenteResource extends JsonResource
             'nombres' => $this->nombres,
             'apellidos' => $this->apellidos,
             'nombre_completo' => $this->nombres . ' ' . $this->apellidos,
+            'usuario' => [
+                'id' => $this->usuario->id,
+                'email' => $this->usuario->email,
+            ],
+            'cargo' => [
+                'id' => $this->cargo->id,
+                'nombre' => $this->cargo->nombre,
+            ],
+            'facultad' => [
+                'id' => $this->facultad->id,
+                'codigo' => $this->facultad->codigo,
+                'nombre' => $this->facultad->nombre,
+            ],
         ];
     }
 }

@@ -10,15 +10,10 @@ class CicloMySqlRepository implements CicloRepositoryInterface
 {
     public function index(array $pagination, array $filter)
     {
-        $idPerfil = Auth::user()->id_perfil;
-        $anioActual = now()->year;
-
         $ciclos = CicloEstudio::query();
 
-        if ($idPerfil === 2) {
-            $ciclos->where('anio', '>=', $anioActual);
-        } else if (isset($filter['anio'])) {
-            $ciclos->where('anio', '=', $filter['anio']);
+        if (isset($filter['codigo'])) {
+            $ciclos->where('codigo', 'like', '%' . $filter['codigo'] . '%');
         }
 
         if ($pagination['paginate'] === 'true') {

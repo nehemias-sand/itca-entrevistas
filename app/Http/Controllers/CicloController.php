@@ -22,7 +22,7 @@ class CicloController extends Controller
             'per_page' => 10
         ], $request->only(['paginate', 'per_page']));
 
-        $filter = $request->only(['anio']);
+        $filter = $request->only(['codigo']);
 
         $data = $this->cicloService->index($pagination, $filter);
         return ApiResponseClass::sendResponse(CicloResource::collection($data));
