@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             JornadaSeeder::class,
             ModalidadSeeder::class,
             TipoRespuestaSeeder::class,
+            CarreraSeeder::class,
         ]);
     }
 }
