@@ -26,7 +26,7 @@ class DocenteController extends Controller
             'per_page' => 10
         ], $request->only(['paginate', 'per_page']));
 
-        $filter = $request->only(['nombres_or_apellidos']);
+        $filter = $request->only(['nombres_or_apellidos', 'id_cargo']);
 
         $data = $this->docenteService->index($pagination, $filter);
 
