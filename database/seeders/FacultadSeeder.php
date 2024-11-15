@@ -45,6 +45,26 @@ class FacultadSeeder extends Seeder
                 'codigo' => 'ING_QUIM',
                 'nombre' => 'INGENIERÍA QUÍMICA',
             ],
+             [
+                'codigo' => 'Megatec',
+                'nombre' => 'Dirección de la Escuela Especializada en Ingeniería ITCA-FEPADE Centro Regional Santa Ana. Dirección Programa MEGATEC.',
+            ],
+             [
+                'codigo' => 'ESC_TUR',
+                'nombre' => 'Escuela de Hostelería y Turismo',
+            ],
+             [
+                'codigo' => 'ESC_PORT',
+                'nombre' => 'Escuela de Administración y Operación Portuaria',
+            ],
+            [
+                'codigo' => 'ESC_ACUIC',
+                'nombre' => 'Escuela de Ciencias del Mar',
+            ],
+            [
+                'codigo' => 'ESC_ADUA',
+                'nombre' => 'Escuela de Logística, Aduanas y Puertos',
+            ],
         ]);
     }
 }
