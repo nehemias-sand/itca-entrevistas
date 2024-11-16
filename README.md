@@ -38,7 +38,13 @@ Este proyecto es una API desarrollada con Laravel 11. A continuación, se detall
     php artisan key:generate
     ```
 
-5. Configura la base de datos y el servicio de correos en el archivo `.env`:
+5. Genera la clave secreta del paquete Tymon JWTAuth:
+
+    ```bash
+    php artisan jwt:secret
+    ```
+
+6. Configura la base de datos y el servicio de correos en el archivo `.env`:
 
     ```env
     DB_CONNECTION=mysql
