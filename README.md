@@ -1,46 +1,85 @@
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-# ITCA Entrevistas
+# ITCA Entrevistas API - Configuración y Ejecución
 
-## Configuración Recomendada del IDE
+Este proyecto es una API desarrollada con Laravel 11. A continuación, se detallan las instrucciones para levantar la API en entornos de desarrollo y producción.
 
-Utiliza [Visual Studio Code (VSCode)](https://code.visualstudio.com/) junto con la extensión [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (asegúrate de desactivar la extensión `Vetur` para evitar conflictos).
+## Requisitos Previos
 
-## Soporte de Tipos para Importaciones `.vue` en TypeScript
+-   **PHP >= 8.1**
+-   **Composer**
+-   **MySQL**
+-   **Servidor Web** (como Apache o Nginx para producción)
 
-TypeScript no maneja por defecto la información de tipos para importaciones de archivos `.vue`. Para solucionar esto, reemplazamos el comando `tsc` de TypeScript con `vue-tsc` para realizar la comprobación de tipos. En los editores, es necesario instalar [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) para que el servicio de lenguaje de TypeScript sea compatible con los tipos de archivos `.vue`.
+## Instalación
 
-## Personalizar la Configuración
+1. Clona el repositorio:
 
-Consulta la [referencia de configuración de Vite](https://vitejs.dev/config/) para más detalles.
+    ```bash
+    git clone https://github.com/tu_usuario/tu_repositorio.git
+    cd tu_repositorio
+    ```
 
-## Configuración del Proyecto
+2. Instala las dependencias de PHP usando Composer:
 
-Primero, instala las dependencias:
+    ```bash
+    composer install
+    ```
 
-```bash
-yarn
-```
+3. Copia el archivo `.env.example` a `.env` y configura las variables de entorno según tus necesidades:
 
-### Compilar y Recargar en Caliente para Desarrollo
+    ```bash
+    cp .env.example .env
+    ```
 
-Inicia el entorno de desarrollo con:
+4. Genera una clave de aplicación:
 
-```bash
-yarn dev
-```
+    ```bash
+    php artisan key:generate
+    ```
 
-### Verificación de Tipos, Compilación y Minificación para Producción
+5. Configura la base de datos y el servicio de correos en el archivo `.env`:
 
-Prepara el proyecto para producción ejecutando:
+    ```env
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=nombre_de_tu_base_de_datos
+    DB_USERNAME=usuario
+    DB_PASSWORD=contraseña
 
-```bash
-yarn build
-```
+    MAIL_MAILER=smtp
+    MAIL_HOST=smtp.gmail.com
+    MAIL_PORT=587
+    MAIL_USERNAME=tu_correo@gmail.com
+    MAIL_PASSWORD=tu_contraseña
+    MAIL_ENCRYPTION=tls
+    MAIL_FROM_ADDRESS=tu_correo@gmail.com
+    MAIL_FROM_NAME="${APP_NAME}"
+    ```
 
-### Analizar Código con [ESLint](https://eslint.org/)
+## Migraciones y Seeds
 
-Ejecuta el análisis de código estático con:
+1. Ejecuta las migraciones para crear las tablas en la base de datos:
 
-```bash
-yarn lint
-```
+    ```bash
+    php artisan migrate
+    ```
+
+2. Ejecuta los seeders para poblar la base de datos con datos iniciales:
+
+    ```bash
+    php artisan db:seed
+    ```
+
+## Modo Desarrollo
+
+En el modo de desarrollo, Laravel usa el servidor de desarrollo integrado de PHP.
+
+1. Inicia el servidor de desarrollo:
+
+    ```bash
+    php artisan serve
+    ```
+
+    El servidor se ejecutará en `http://localhost:8000`.
